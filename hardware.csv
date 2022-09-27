@@ -1,0 +1,4 @@
+hostname,mac,ip_address,gateway,netmask,nameservers,labels,disk
+master,3c:7c:3f:7b:8d:f5,192.168.1.115,192.168.1.1,255.255.255.0,181.213.132.6|181.213.132.7,type=control-plane,/dev/nvme0n1
+gpu-worker,3c:7c:3f:7c:11:fd,192.168.1.116,192.168.1.1,255.255.255.0,1181.213.132.6|181.213.132.7,type=worker,/dev/nvme0n1
+threadripper,04:42:1a:e6:10:1a,192.168.1.120,192.168.1.1,255.255.255.0,1181.213.132.6|181.213.132.7,type=worker,/dev/nvme0n1

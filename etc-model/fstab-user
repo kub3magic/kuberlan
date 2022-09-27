@@ -1,0 +1,4 @@
+# adicionar essa linha para montar automaticamente o nfs vindo do servidor com HD
+# nfs@threadripper
+192.168.1.120:/home/ec2-user/dataplanet /home/netinhodocorpodemola/dataplanet nfs rw,hard,intr 0 0
+

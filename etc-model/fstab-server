@@ -1,0 +1,4 @@
+# adicionar essa linha para montar o HD automaticamente
+# dataplanet-source
+/dev/sda	/home/ec2-user/dataplanet	ext4	defaults	0	0
+

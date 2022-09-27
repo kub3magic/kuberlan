@@ -1,0 +1,78 @@
+apiVersion: anywhere.eks.amazonaws.com/v1alpha1
+kind: Cluster
+metadata:
+  name: patagon-eksa
+spec:
+  clusterNetwork:
+    cniConfig:
+      cilium: {}
+    pods:
+      cidrBlocks:
+      - 10.92.0.0/16
+    services:
+      cidrBlocks:
+      - 10.96.0.0/12
+  controlPlaneConfiguration:
+    count: 1
+    endpoint:
+      host: "192.168.1.113"
+    machineGroupRef:
+      kind: TinkerbellMachineConfig
+      name: patagon-eksa-cp
+  datacenterRef:
+    kind: TinkerbellDatacenterConfig
+    name: patagon-eksa
+  kubernetesVersion: "1.23"
+  managementCluster:
+    name: patagon-eksa
+  workerNodeGroupConfigurations:
+  - count: 2
+    machineGroupRef:
+      kind: TinkerbellMachineConfig
+      name: patagon-eksa
+    name: md-0
+
+---
+apiVersion: anywhere.eks.amazonaws.com/v1alpha1
+kind: TinkerbellDatacenterConfig
+metadata:
+  name: patagon-eksa
+spec:
+  tinkerbellIP: "192.168.1.114"
+  osImageURL: "http://192.168.1.25:8000/ubuntu.gz"
+  hookImagesURLPath: "http://192.168.1.25:8000/hook"
+
+---
+apiVersion: anywhere.eks.amazonaws.com/v1alpha1
+kind: TinkerbellMachineConfig
+metadata:
+  name: patagon-eksa-cp
+spec:
+  hardwareSelector:
+    type: control-plane
+  osFamily: ubuntu
+  templateRef: {}
+  users:
+  - name: ec2-user
+    sshAuthorizedKeys:
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDZxOw3MaZE7Q22U4dMqMoijpjTHUEaqBaB8Z4cHo4oSG91++jQkTtTAEoFulFBmirvcNoKZalkLfcoz7ek4xSwOxDU5i2SCB8EzvKmRRWiLolILhwxBOXskcfk69dZByqF0ThKKyGHUOQQrcPGHzfDtiK+XPYLUHpcNKOLiKH2OeGGyeUE19nnRuXcbg+mZfjeDta3Iaqs4/mX8lAu9cRGWeEvPWaiyBBA0oFf6MVp5MydNeZaDc1fvNvTfBhE4J4Zqz5+280oou1LT9rbpTdvINFg59JicbCltxIUnfm+nE8RnNtIFJpp539vOXkbbkHLtDM3Qn2NUUjiQJY1N+TjbfL1PgsEZ2/dHAvJgtIOHqnY4klWYIQUWcVOeJy5RcocZg0xcnkeEx1+iI4vKOXGPu+GKS0yHa1WCC7VFhT96F+Ea24cxqm28ObpxAyjBwuDYSZRn3YVHuDBbWMgtZB0rOStLFIuyxqrbeAXAITrR6c0EUjggq1bCw0OSpqWAq8= netinhodocorpodemola@citipwn3d
+
+
+---
+apiVersion: anywhere.eks.amazonaws.com/v1alpha1
+kind: TinkerbellMachineConfig
+metadata:
+  name: patagon-eksa
+spec:
+  hardwareSelector:
+    type: worker
+  osFamily: ubuntu
+  templateRef: {}
+  users:
+  - name: ec2-user
+    sshAuthorizedKeys:
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDZxOw3MaZE7Q22U4dMqMoijpjTHUEaqBaB8Z4cHo4oSG91++jQkTtTAEoFulFBmirvcNoKZalkLfcoz7ek4xSwOxDU5i2SCB8EzvKmRRWiLolILhwxBOXskcfk69dZByqF0ThKKyGHUOQQrcPGHzfDtiK+XPYLUHpcNKOLiKH2OeGGyeUE19nnRuXcbg+mZfjeDta3Iaqs4/mX8lAu9cRGWeEvPWaiyBBA0oFf6MVp5MydNeZaDc1fvNvTfBhE4J4Zqz5+280oou1LT9rbpTdvINFg59JicbCltxIUnfm+nE8RnNtIFJpp539vOXkbbkHLtDM3Qn2NUUjiQJY1N+TjbfL1PgsEZ2/dHAvJgtIOHqnY4klWYIQUWcVOeJy5RcocZg0xcnkeEx1+iI4vKOXGPu+GKS0yHa1WCC7VFhT96F+Ea24cxqm28ObpxAyjBwuDYSZRn3YVHuDBbWMgtZB0rOStLFIuyxqrbeAXAITrR6c0EUjggq1bCw0OSpqWAq8= netinhodocorpodemola@citipwn3d
+
+
+---
+
